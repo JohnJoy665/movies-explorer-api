@@ -4,6 +4,7 @@
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
     "consistent-return": ["off"],
     "no-console": "off",
-    "spaced-comment": ["error", "always", { "exceptions": ["-", "+"] }]
+    "spaced-comment": ["error", "always", { "exceptions": ["-", "+"] }],
+    "arrow-body-style": ["error", "always"]
  }
 }

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const filmShema = new mongoose.Schema({
   country: {
@@ -40,8 +41,7 @@ const filmShema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => {
-        const linkRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!-]))?/;
-        return linkRegex.test(v);
+        return validator.isURL(v);
       },
       message: 'не валидная ссылка',
     },
@@ -51,8 +51,7 @@ const filmShema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => {
-        const linkRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!-]))?/;
-        return linkRegex.test(v);
+        return validator.isURL(v);
       },
       message: 'не валидная ссылка',
     },
@@ -62,8 +61,7 @@ const filmShema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => {
-        const linkRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!-]))?/;
-        return linkRegex.test(v);
+        return validator.isURL(v);
       },
       message: 'не валидная ссылка',
     },

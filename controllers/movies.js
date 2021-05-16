@@ -1,7 +1,7 @@
 const Movies = require('../models/movie.js');
 const BadRequest = require('../errors/BadRequest.js');
 const NotFound = require('../errors/NotFound.js');
-const Conflict = require('../errors/Conflict.js');
+const Forbidden = require('../errors/Forbidden');
 
 const getFilms = (req, res, next) => {
   Movies.find()
@@ -47,6 +47,8 @@ const createFilm = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequest('Данные не валидны'));
+      } else {
+        next(err);
       }
     });
 };
@@ -62,9 +64,12 @@ const deleteFilm = (req, res, next) => {
         Movies.findByIdAndDelete(filmId)
           .then((movie) => {
             res.send(movie);
+          })
+          .catch((err) => {
+            next(err);
           });
       } else {
-        next(new Conflict('Фильм может быть удален только своим владельцем'));
+        next(new Forbidden('Фильм может быть удален только своим владельцем'));
       }
     })
     .catch((err) => {

@@ -34,6 +34,8 @@ const createUser = (req, res, next) => {
         .catch((err) => {
           if (err.name === 'ValidationError') {
             next(new BadRequest('Данные не валидны'));
+          } else {
+            next(err);
           }
         });
     })

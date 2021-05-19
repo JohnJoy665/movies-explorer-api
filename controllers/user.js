@@ -1,6 +1,5 @@
 const User = require('../models/user.js');
 const BadRequest = require('../errors/BadRequest.js');
-
 const NotFound = require('../errors/NotFound.js');
 const Conflict = require('../errors/Conflict.js');
 
@@ -42,19 +41,13 @@ const updateUser = (req, res, next) => {
     .catch((err) => {
       if (err.codeName === 'DuplicateKey') {
         next(new Conflict('Пользователь с таким email уже существует'));
+      } else {
+        next(err);
       }
     });
-};
-
-// вывести всех поользователей (временно)
-const getUsers = (req, res) => {
-  User.find({}).then((users) => {
-    res.send(users);
-  });
 };
 
 module.exports = {
   getUser,
   updateUser,
-  getUsers,
 };
